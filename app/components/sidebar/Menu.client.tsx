@@ -6,6 +6,7 @@ import { ControlPanel } from '~/components/@settings/core/ControlPanel';
 import { SettingsButton, HelpButton } from '~/components/ui/SettingsButton';
 import { Button } from '~/components/ui/Button';
 import { db, deleteById, getAll, chatId, type ChatHistoryItem, useChatHistory } from '~/lib/persistence';
+import { supabaseSync } from '~/lib/persistence/supabaseSync';
 import { cubicEasingFn } from '~/utils/easings';
 import { HistoryItem } from './HistoryItem';
 import { binDates } from './date-binning';
@@ -13,6 +14,7 @@ import { useSearchFilter } from '~/lib/hooks/useSearchFilter';
 import { classNames } from '~/utils/classNames';
 import { useStore } from '@nanostores/react';
 import { profileStore } from '~/lib/stores/profile';
+import { authStore } from '~/lib/stores/auth';
 
 const menuVariants = {
   closed: {
@@ -66,15 +68,20 @@ export const Menu = () => {
   const { duplicateCurrentChat, exportChat } = useChatHistory();
   const menuRef = useRef<HTMLDivElement>(null);
   const [list, setList] = useState<ChatHistoryItem[]>([]);
+  const [supabaseChats, setSupabaseChats] = useState<ChatHistoryItem[]>([]);
   const [open, setOpen] = useState(false);
   const [dialogContent, setDialogContent] = useState<DialogContent>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const profile = useStore(profileStore);
+  const { isAuthenticated } = useStore(authStore);
   const [selectionMode, setSelectionMode] = useState(false);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
+  // Merge local and Supabase chats
+  const mergedList = [...list, ...supabaseChats];
+
   const { filteredItems: filteredList, handleSearchChange } = useSearchFilter({
-    items: list,
+    items: mergedList,
     searchFields: ['description'],
   });
 
@@ -86,6 +93,30 @@ export const Menu = () => {
         .catch((error) => toast.error(error.message));
     }
   }, []);
+
+  const loadSupabaseChats = useCallback(async () => {
+    if (!isAuthenticated) {
+      setSupabaseChats([]);
+      return;
+    }
+
+    try {
+      const { chats, error } = await supabaseSync.loadUserChats();
+      
+      if (error) {
+        console.error('Error loading Supabase chats:', error);
+        return;
+      }
+
+      // Filter out chats that are already in local list to avoid duplicates
+      const localIds = new Set(list.map(item => item.id));
+      const uniqueSupabaseChats = chats.filter(chat => !localIds.has(chat.id));
+      
+      setSupabaseChats(uniqueSupabaseChats);
+    } catch (error) {
+      console.error('Error loading Supabase chats:', error);
+    }
+  }, [isAuthenticated, list]);
 
   const deleteChat = useCallback(
     async (id: string): Promise<void> => {
@@ -263,8 +294,9 @@ export const Menu = () => {
   useEffect(() => {
     if (open) {
       loadEntries();
+      loadSupabaseChats();
     }
-  }, [open, loadEntries]);
+  }, [open, loadEntries, loadSupabaseChats]);
 
   // Exit selection mode when sidebar is closed
   useEffect(() => {
@@ -400,7 +432,19 @@ export const Menu = () => {
           <div className="flex-1 overflow-auto px-3 pb-3">
             {filteredList.length === 0 && (
               <div className="px-4 text-gray-500 dark:text-gray-400 text-sm">
-                {list.length === 0 ? 'No previous conversations' : 'No matches found'}
+                {mergedList.length === 0 ? (
+                  isAuthenticated ? 
+                    'No conversations yet. Start a new chat!' : 
+                    'No previous conversations'
+                ) : 'No matches found'}
+              </div>
+            )}
+            
+            {/* Show Supabase indicator if user is authenticated */}
+            {isAuthenticated && supabaseChats.length > 0 && (
+              <div className="px-4 py-2 text-xs text-blue-500 dark:text-blue-400 flex items-center gap-2">
+                <div className="i-ph:cloud-check text-sm" />
+                <span>Synced with cloud</span>
               </div>
             )}
             <DialogRoot open={dialogContent !== null}>

@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useStore } from '@nanostores/react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import * as Dialog from '@radix-ui/react-dialog';
 import { toast } from 'react-toastify';
 import { authStore, clearAuth, setAuthLoading } from '~/lib/stores/auth';
 import { authService } from '~/lib/supabase/auth';
+import { ProfileSettings } from './ProfileSettings';
 import { classNames } from '~/utils/classNames';
 
 export function UserMenu() {
   const { user, isAuthenticated } = useStore(authStore);
+  const [showProfileDialog, setShowProfileDialog] = useState(false);
 
   if (!isAuthenticated || !user) {
     return null;
@@ -43,8 +46,9 @@ export function UserMenu() {
     .slice(0, 2);
 
   return (
-    <DropdownMenu.Root>
-      <DropdownMenu.Trigger asChild>
+    <>
+      <DropdownMenu.Root>
+        <DropdownMenu.Trigger asChild>
         <button
           className={classNames(
             'flex items-center gap-2 px-3 py-2 rounded-lg',
@@ -91,6 +95,7 @@ export function UserMenu() {
           </div>
 
           <DropdownMenu.Item
+            onSelect={() => setShowProfileDialog(true)}
             className={classNames(
               'flex items-center gap-2 px-3 py-2 rounded-md',
               'text-sm text-gray-700 dark:text-gray-300',
@@ -100,20 +105,7 @@ export function UserMenu() {
             )}
           >
             <div className="i-ph:user text-lg" />
-            Profile
-          </DropdownMenu.Item>
-
-          <DropdownMenu.Item
-            className={classNames(
-              'flex items-center gap-2 px-3 py-2 rounded-md',
-              'text-sm text-gray-700 dark:text-gray-300',
-              'hover:bg-gray-100 dark:hover:bg-gray-800',
-              'cursor-pointer outline-none',
-              'transition-colors'
-            )}
-          >
-            <div className="i-ph:folder text-lg" />
-            My Projects
+            Profile Settings
           </DropdownMenu.Item>
 
           <DropdownMenu.Separator className="h-px bg-gray-200 dark:bg-gray-700 my-1" />
@@ -134,6 +126,27 @@ export function UserMenu() {
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>
+
+      {/* Profile Settings Dialog */}
+      <Dialog.Root open={showProfileDialog} onOpenChange={setShowProfileDialog}>
+        <Dialog.Portal>
+          <Dialog.Overlay className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50" />
+          <Dialog.Content className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl max-h-[85vh] overflow-y-auto z-50">
+            <div className="bg-white dark:bg-gray-900 rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700 p-6">
+              <ProfileSettings />
+              <Dialog.Close asChild>
+                <button
+                  className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  aria-label="Close"
+                >
+                  <div className="i-ph:x text-xl text-gray-500 dark:text-gray-400" />
+                </button>
+              </Dialog.Close>
+            </div>
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
+    </>
   );
 }
 

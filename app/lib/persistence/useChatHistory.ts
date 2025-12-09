@@ -5,6 +5,8 @@ import { generateId, type JSONValue, type Message } from 'ai';
 import { toast } from 'react-toastify';
 import { workbenchStore } from '~/lib/stores/workbench';
 import { logStore } from '~/lib/stores/logs'; // Import logStore
+import { authStore } from '~/lib/stores/auth';
+import { supabaseSync } from './supabaseSync';
 import {
   getMessages,
   getNextId,
@@ -341,6 +343,23 @@ ${value.content}
         undefined,
         chatMetadata.get(),
       );
+
+      // Auto-sync to Supabase if user is authenticated
+      const { isAuthenticated } = authStore.get();
+      if (isAuthenticated && description.get()) {
+        supabaseSync.autoSync(
+          finalChatId,
+          [...archivedMessages, ...messages],
+          description.get() || 'Untitled Chat',
+          {
+            supabaseId: chatMetadata.get()?.supabaseId,
+            projectId: chatMetadata.get()?.projectId,
+          }
+        ).catch((error) => {
+          console.error('Supabase sync failed:', error);
+          // Don't show error to user - sync is background operation
+        });
+      }
     },
     duplicateCurrentChat: async (listItemId: string) => {
       if (!db || (!mixedId && !listItemId)) {
