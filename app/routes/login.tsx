@@ -91,7 +91,7 @@ export default function Login() {
                   'border-gray-300 dark:border-gray-700',
                   'text-gray-900 dark:text-white',
                   'placeholder-gray-500 dark:placeholder-gray-400',
-                  'focus:outline-none focus:border-blue-500 dark:focus:border-blue-400',
+                  'focus:outline-none focus:border-red-500 dark:focus:border-red-400',
                   'transition-colors text-base'
                 )}
                 placeholder="your@email.com"
@@ -118,7 +118,7 @@ export default function Login() {
                     'border-gray-300 dark:border-gray-700',
                     'text-gray-900 dark:text-white',
                     'placeholder-gray-500 dark:placeholder-gray-400',
-                    'focus:outline-none focus:border-blue-500 dark:focus:border-blue-400',
+                    'focus:outline-none focus:border-red-500 dark:focus:border-red-400',
                     'transition-colors text-base'
                   )}
                   placeholder="••••••••"
@@ -143,13 +143,13 @@ export default function Login() {
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="checkbox"
-                  className="w-4 h-4 rounded border-gray-300 dark:border-gray-700 text-blue-500 focus:ring-2 focus:ring-blue-500"
+                  className="w-4 h-4 rounded border-gray-300 dark:border-gray-700 text-red-500 focus:ring-2 focus:ring-red-500"
                 />
                 <span className="text-gray-700 dark:text-gray-300">Remember me</span>
               </label>
               <button
                 type="button"
-                className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 font-medium"
+                className="text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 font-medium"
               >
                 Forgot password?
               </button>
@@ -161,11 +161,11 @@ export default function Login() {
               disabled={isLoading}
               className={classNames(
                 'w-full py-3.5 px-4 rounded-lg font-semibold text-base',
-                'bg-blue-500 hover:bg-blue-600 text-white',
+                'bg-red-500 hover:bg-red-600 text-white',
                 'disabled:opacity-50 disabled:cursor-not-allowed',
                 'transition-all duration-200',
                 'flex items-center justify-center gap-2',
-                'shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/30'
+                'shadow-lg shadow-red-500/25 hover:shadow-xl hover:shadow-red-500/30'
               )}
             >
               {isLoading ? (

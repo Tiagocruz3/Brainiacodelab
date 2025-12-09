@@ -57,7 +57,7 @@ export function Header() {
                     href="/login"
                     className={classNames(
                       'px-4 py-2 rounded-lg font-medium',
-                      'bg-blue-500 hover:bg-blue-600 text-white',
+                      'bg-red-500 hover:bg-red-600 text-white',
                       'transition-colors'
                     )}
                   >

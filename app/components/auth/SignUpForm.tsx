@@ -90,7 +90,7 @@ export function SignUpForm({ onSuccess, onSwitchToLogin }: SignUpFormProps) {
             'border-gray-300 dark:border-gray-700',
             'text-gray-900 dark:text-white',
             'placeholder-gray-500 dark:placeholder-gray-400',
-            'focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400',
+            'focus:outline-none focus:ring-2 focus:ring-red-500 dark:focus:ring-red-400',
             'transition-colors'
           )}
           placeholder="your@email.com"
@@ -114,7 +114,7 @@ export function SignUpForm({ onSuccess, onSwitchToLogin }: SignUpFormProps) {
               'border-gray-300 dark:border-gray-700',
               'text-gray-900 dark:text-white',
               'placeholder-gray-500 dark:placeholder-gray-400',
-              'focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400',
+              'focus:outline-none focus:ring-2 focus:ring-red-500 dark:focus:ring-red-400',
               'transition-colors'
             )}
             placeholder="username"
@@ -136,7 +136,7 @@ export function SignUpForm({ onSuccess, onSwitchToLogin }: SignUpFormProps) {
               'border-gray-300 dark:border-gray-700',
               'text-gray-900 dark:text-white',
               'placeholder-gray-500 dark:placeholder-gray-400',
-              'focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400',
+              'focus:outline-none focus:ring-2 focus:ring-red-500 dark:focus:ring-red-400',
               'transition-colors'
             )}
             placeholder="John Doe"
@@ -160,7 +160,7 @@ export function SignUpForm({ onSuccess, onSwitchToLogin }: SignUpFormProps) {
               'border-gray-300 dark:border-gray-700',
               'text-gray-900 dark:text-white',
               'placeholder-gray-500 dark:placeholder-gray-400',
-              'focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400',
+              'focus:outline-none focus:ring-2 focus:ring-red-500 dark:focus:ring-red-400',
               'transition-colors'
             )}
             placeholder="••••••••"
@@ -192,7 +192,7 @@ export function SignUpForm({ onSuccess, onSwitchToLogin }: SignUpFormProps) {
             'border-gray-300 dark:border-gray-700',
             'text-gray-900 dark:text-white',
             'placeholder-gray-500 dark:placeholder-gray-400',
-            'focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400',
+            'focus:outline-none focus:ring-2 focus:ring-red-500 dark:focus:ring-red-400',
             'transition-colors'
           )}
           placeholder="••••••••"
@@ -207,7 +207,7 @@ export function SignUpForm({ onSuccess, onSwitchToLogin }: SignUpFormProps) {
         disabled={isLoading}
         className={classNames(
           'w-full py-2.5 px-4 rounded-lg font-medium',
-          'bg-blue-500 hover:bg-blue-600 text-white',
+          'bg-red-500 hover:bg-red-600 text-white',
           'disabled:opacity-50 disabled:cursor-not-allowed',
           'transition-colors',
           'flex items-center justify-center gap-2'
@@ -228,7 +228,7 @@ export function SignUpForm({ onSuccess, onSwitchToLogin }: SignUpFormProps) {
         <button
           type="button"
           onClick={onSwitchToLogin}
-          className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 font-medium"
+          className="text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 font-medium"
         >
           Sign in
         </button>

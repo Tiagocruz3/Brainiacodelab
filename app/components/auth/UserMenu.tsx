@@ -54,7 +54,7 @@ export function UserMenu() {
             'flex items-center gap-2 px-3 py-2 rounded-lg',
             'hover:bg-gray-100 dark:hover:bg-gray-800',
             'transition-colors',
-            'focus:outline-none focus:ring-2 focus:ring-blue-500'
+            'focus:outline-none focus:ring-2 focus:ring-red-500'
           )}
         >
           {user.avatar_url ? (
@@ -64,7 +64,7 @@ export function UserMenu() {
               className="w-8 h-8 rounded-full object-cover"
             />
           ) : (
-            <div className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center font-medium text-sm">
+            <div className="w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center font-medium text-sm">
               {initials}
             </div>
           )}

@@ -71,7 +71,7 @@ export function ProfileSettings() {
             onClick={() => setIsEditing(true)}
             className={classNames(
               'px-4 py-2 rounded-lg text-sm font-medium',
-              'bg-blue-500 hover:bg-blue-600 text-white',
+              'bg-red-500 hover:bg-red-600 text-white',
               'transition-colors'
             )}
           >
@@ -94,7 +94,7 @@ export function ProfileSettings() {
                 className="w-16 h-16 rounded-full object-cover"
               />
             ) : (
-              <div className="w-16 h-16 rounded-full bg-blue-500 text-white flex items-center justify-center text-2xl font-bold">
+              <div className="w-16 h-16 rounded-full bg-red-500 text-white flex items-center justify-center text-2xl font-bold">
                 {(user.full_name || user.email)[0].toUpperCase()}
               </div>
             )}
@@ -108,7 +108,7 @@ export function ProfileSettings() {
                   'border-gray-300 dark:border-gray-700',
                   'text-gray-900 dark:text-white',
                   'placeholder-gray-500 dark:placeholder-gray-400',
-                  'focus:outline-none focus:ring-2 focus:ring-blue-500'
+                  'focus:outline-none focus:ring-2 focus:ring-red-500'
                 )}
                 placeholder="https://example.com/avatar.jpg"
                 disabled={isSaving}
@@ -154,7 +154,7 @@ export function ProfileSettings() {
               'border-gray-300 dark:border-gray-700',
               'text-gray-900 dark:text-white',
               'placeholder-gray-500 dark:placeholder-gray-400',
-              'focus:outline-none focus:ring-2 focus:ring-blue-500',
+              'focus:outline-none focus:ring-2 focus:ring-red-500',
               'disabled:bg-gray-50 dark:disabled:bg-gray-900 disabled:cursor-not-allowed'
             )}
             placeholder="username"
@@ -177,7 +177,7 @@ export function ProfileSettings() {
               'border-gray-300 dark:border-gray-700',
               'text-gray-900 dark:text-white',
               'placeholder-gray-500 dark:placeholder-gray-400',
-              'focus:outline-none focus:ring-2 focus:ring-blue-500',
+              'focus:outline-none focus:ring-2 focus:ring-red-500',
               'disabled:bg-gray-50 dark:disabled:bg-gray-900 disabled:cursor-not-allowed'
             )}
             placeholder="John Doe"
@@ -196,7 +196,7 @@ export function ProfileSettings() {
               disabled={isSaving}
               className={classNames(
                 'flex-1 py-2.5 px-4 rounded-lg font-medium',
-                'bg-blue-500 hover:bg-blue-600 text-white',
+                'bg-red-500 hover:bg-red-600 text-white',
                 'disabled:opacity-50 disabled:cursor-not-allowed',
                 'transition-colors',
                 'flex items-center justify-center gap-2'

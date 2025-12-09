@@ -109,7 +109,7 @@ export default function SignUp() {
                   'border-gray-300 dark:border-gray-700',
                   'text-gray-900 dark:text-white',
                   'placeholder-gray-500 dark:placeholder-gray-400',
-                  'focus:outline-none focus:border-blue-500 dark:focus:border-blue-400',
+                  'focus:outline-none focus:border-red-500 dark:focus:border-red-400',
                   'transition-colors text-base'
                 )}
                 placeholder="your@email.com"
@@ -136,7 +136,7 @@ export default function SignUp() {
                     'border-gray-300 dark:border-gray-700',
                     'text-gray-900 dark:text-white',
                     'placeholder-gray-500 dark:placeholder-gray-400',
-                    'focus:outline-none focus:border-blue-500 dark:focus:border-blue-400',
+                    'focus:outline-none focus:border-red-500 dark:focus:border-red-400',
                     'transition-colors text-base'
                   )}
                   placeholder="username"
@@ -157,7 +157,7 @@ export default function SignUp() {
                     'border-gray-300 dark:border-gray-700',
                     'text-gray-900 dark:text-white',
                     'placeholder-gray-500 dark:placeholder-gray-400',
-                    'focus:outline-none focus:border-blue-500 dark:focus:border-blue-400',
+                    'focus:outline-none focus:border-red-500 dark:focus:border-red-400',
                     'transition-colors text-base'
                   )}
                   placeholder="John Doe"
@@ -182,7 +182,7 @@ export default function SignUp() {
                     'border-gray-300 dark:border-gray-700',
                     'text-gray-900 dark:text-white',
                     'placeholder-gray-500 dark:placeholder-gray-400',
-                    'focus:outline-none focus:border-blue-500 dark:focus:border-blue-400',
+                    'focus:outline-none focus:border-red-500 dark:focus:border-red-400',
                     'transition-colors text-base'
                   )}
                   placeholder="••••••••"
@@ -217,7 +217,7 @@ export default function SignUp() {
                   'border-gray-300 dark:border-gray-700',
                   'text-gray-900 dark:text-white',
                   'placeholder-gray-500 dark:placeholder-gray-400',
-                  'focus:outline-none focus:border-blue-500 dark:focus:border-blue-400',
+                  'focus:outline-none focus:border-red-500 dark:focus:border-red-400',
                   'transition-colors text-base'
                 )}
                 placeholder="••••••••"
@@ -234,11 +234,11 @@ export default function SignUp() {
               disabled={isLoading}
               className={classNames(
                 'w-full py-3.5 px-4 rounded-lg font-semibold text-base',
-                'bg-blue-500 hover:bg-blue-600 text-white',
+                'bg-red-500 hover:bg-red-600 text-white',
                 'disabled:opacity-50 disabled:cursor-not-allowed',
                 'transition-all duration-200',
                 'flex items-center justify-center gap-2',
-                'shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/30',
+                'shadow-lg shadow-red-500/25 hover:shadow-xl hover:shadow-red-500/30',
                 'mt-6'
               )}
             >
