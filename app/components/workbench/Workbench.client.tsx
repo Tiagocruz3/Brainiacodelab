@@ -61,14 +61,14 @@ const workbenchVariants = {
   closed: {
     width: 0,
     transition: {
-      duration: 0.2,
+      duration: 0.15,
       ease: cubicEasingFn,
     },
   },
   open: {
     width: 'var(--workbench-width)',
     transition: {
-      duration: 0.2,
+      duration: 0.15,
       ease: cubicEasingFn,
     },
   },
@@ -521,7 +521,12 @@ interface ViewProps extends HTMLMotionProps<'div'> {
 
 const View = memo(({ children, ...props }: ViewProps) => {
   return (
-    <motion.div className="absolute inset-0" transition={viewTransition} {...props}>
+    <motion.div 
+      className="absolute inset-0" 
+      transition={viewTransition} 
+      {...props}
+      style={{ willChange: 'transform' }}
+    >
       {children}
     </motion.div>
   );

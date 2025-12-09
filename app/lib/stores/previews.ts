@@ -24,7 +24,7 @@ export class PreviewsStore {
   #lastUpdate = new Map<string, number>();
   #watchedFiles = new Set<string>();
   #refreshTimeouts = new Map<string, NodeJS.Timeout>();
-  #REFRESH_DELAY = 300;
+  #REFRESH_DELAY = 500;
   #storageChannel?: BroadcastChannel;
 
   previews = atom<PreviewInfo[]>([]);
