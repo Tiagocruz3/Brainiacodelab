@@ -1,12 +1,18 @@
+import { useState } from 'react';
 import { useStore } from '@nanostores/react';
 import { ClientOnly } from 'remix-utils/client-only';
 import { chatStore } from '~/lib/stores/chat';
+import { authStore } from '~/lib/stores/auth';
 import { classNames } from '~/utils/classNames';
 import { HeaderActionButtons } from './HeaderActionButtons.client';
 import { ChatDescription } from '~/lib/persistence/ChatDescription.client';
+import { AuthDialog } from '../auth/AuthDialog';
+import { UserMenu } from '../auth/UserMenu';
 
 export function Header() {
   const chat = useStore(chatStore);
+  const { isAuthenticated, isLoading } = useStore(authStore);
+  const [showAuthDialog, setShowAuthDialog] = useState(false);
 
   return (
     <header
@@ -29,13 +35,45 @@ export function Header() {
           </span>
           <ClientOnly>
             {() => (
-              <div className="">
+              <div className="flex items-center gap-2">
                 <HeaderActionButtons chatStarted={chat.started} />
               </div>
             )}
           </ClientOnly>
         </>
       )}
+      
+      {/* Auth Section */}
+      {!chat.started && <div className="flex-1" />}
+      <ClientOnly>
+        {() => (
+          <div className="flex items-center gap-2">
+            {!isLoading && (
+              <>
+                {isAuthenticated ? (
+                  <UserMenu />
+                ) : (
+                  <button
+                    onClick={() => setShowAuthDialog(true)}
+                    className={classNames(
+                      'px-4 py-2 rounded-lg font-medium',
+                      'bg-blue-500 hover:bg-blue-600 text-white',
+                      'transition-colors'
+                    )}
+                  >
+                    Sign in
+                  </button>
+                )}
+              </>
+            )}
+            <AuthDialog
+              isOpen={showAuthDialog}
+              onClose={() => setShowAuthDialog(false)}
+              initialMode="login"
+            />
+          </div>
+        )}
+      </ClientOnly>
     </header>
   );
 }
