@@ -1,0 +1,86 @@
+-- Create Admin User: tiagocruz3@gmail.com
+-- Password: Thiago77!
+-- 
+-- Run this SQL in Supabase Dashboard > SQL Editor
+-- This will create the user and automatically trigger the profile creation
+
+-- First, create the user in auth.users
+INSERT INTO auth.users (
+  instance_id,
+  id,
+  aud,
+  role,
+  email,
+  encrypted_password,
+  email_confirmed_at,
+  invited_at,
+  confirmation_token,
+  confirmation_sent_at,
+  recovery_token,
+  recovery_sent_at,
+  email_change_token_new,
+  email_change,
+  email_change_sent_at,
+  last_sign_in_at,
+  raw_app_meta_data,
+  raw_user_meta_data,
+  is_super_admin,
+  created_at,
+  updated_at,
+  phone,
+  phone_confirmed_at,
+  phone_change,
+  phone_change_token,
+  phone_change_sent_at,
+  email_change_token_current,
+  email_change_confirm_status,
+  banned_until,
+  reauthentication_token,
+  reauthentication_sent_at,
+  is_sso_user,
+  deleted_at
+) VALUES (
+  '00000000-0000-0000-0000-000000000000',
+  gen_random_uuid(),
+  'authenticated',
+  'authenticated',
+  'tiagocruz3@gmail.com',
+  crypt('Thiago77!', gen_salt('bf')), -- Encrypts the password
+  NOW(),
+  NULL,
+  '',
+  NULL,
+  '',
+  NULL,
+  '',
+  '',
+  NULL,
+  NULL,
+  '{"provider":"email","providers":["email"]}',
+  '{"username":"tiagocruz3","full_name":"Tiago Cruz"}',
+  FALSE,
+  NOW(),
+  NOW(),
+  NULL,
+  NULL,
+  '',
+  '',
+  NULL,
+  '',
+  0,
+  NULL,
+  '',
+  NULL,
+  FALSE,
+  NULL
+)
+ON CONFLICT (email) DO NOTHING;
+
+-- Verify the user was created
+SELECT id, email, created_at, email_confirmed_at 
+FROM auth.users 
+WHERE email = 'tiagocruz3@gmail.com';
+
+-- Check the profile was auto-created (should happen via trigger)
+SELECT * FROM public.profiles WHERE email = 'tiagocruz3@gmail.com';
+

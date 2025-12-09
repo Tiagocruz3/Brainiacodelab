@@ -53,8 +53,8 @@ export function Header() {
                 {isAuthenticated ? (
                   <UserMenu />
                 ) : (
-                  <button
-                    onClick={() => setShowAuthDialog(true)}
+                  <a
+                    href="/login"
                     className={classNames(
                       'px-4 py-2 rounded-lg font-medium',
                       'bg-blue-500 hover:bg-blue-600 text-white',
@@ -62,15 +62,10 @@ export function Header() {
                     )}
                   >
                     Sign in
-                  </button>
+                  </a>
                 )}
               </>
             )}
-            <AuthDialog
-              isOpen={showAuthDialog}
-              onClose={() => setShowAuthDialog(false)}
-              initialMode="login"
-            />
           </div>
         )}
       </ClientOnly>
