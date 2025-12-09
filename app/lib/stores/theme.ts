@@ -9,38 +9,28 @@ export function themeIsDark() {
   return themeStore.get() === 'dark';
 }
 
-export const DEFAULT_THEME = 'light';
+export const DEFAULT_THEME: Theme = 'dark';
 
 export const themeStore = atom<Theme>(initStore());
 
 function initStore() {
+  // Force dark theme everywhere
   if (!import.meta.env.SSR) {
-    const persistedTheme = localStorage.getItem(kTheme) as Theme | undefined;
-    const themeAttribute = document.querySelector('html')?.getAttribute('data-theme');
-
-    return persistedTheme ?? (themeAttribute as Theme) ?? DEFAULT_THEME;
+    localStorage.setItem(kTheme, 'dark');
+    document.querySelector('html')?.setAttribute('data-theme', 'dark');
   }
 
   return DEFAULT_THEME;
 }
 
 export function toggleTheme() {
-  const currentTheme = themeStore.get();
-  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-  // Update the theme store
+  // Lock theme to dark; keep side effects consistent
+  const newTheme: Theme = 'dark';
   themeStore.set(newTheme);
-
-  // Update localStorage
   localStorage.setItem(kTheme, newTheme);
-
-  // Update the HTML attribute
   document.querySelector('html')?.setAttribute('data-theme', newTheme);
-
-  // Update user profile if it exists
   try {
     const userProfile = localStorage.getItem('bolt_user_profile');
-
     if (userProfile) {
       const profile = JSON.parse(userProfile);
       profile.theme = newTheme;
@@ -50,5 +40,5 @@ export function toggleTheme() {
     console.error('Error updating user profile theme:', error);
   }
 
-  logStore.logSystem(`Theme changed to ${newTheme} mode`);
+  logStore.logSystem(`Theme locked to ${newTheme} mode`);
 }

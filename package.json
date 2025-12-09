@@ -7,8 +7,8 @@
   "type": "module",
   "version": "1.0.0",
   "author": {
-    "name": "bolt.diy team",
-    "email": "maintainers@bolt.diy"
+    "name": "Syntax Stage team",
+    "email": "maintainers@syntaxstage.com"
   },
   "scripts": {
     "deploy": "npm run build && wrangler pages deploy",
@@ -194,7 +194,7 @@
     "pnpm": "^9.14.4",
     "prettier": "^3.5.3",
     "rimraf": "^4.4.1",
-    "sass-embedded": "^1.81.0",
+    "sass-embedded": "^1.93.3",
     "stream-browserify": "^3.0.0",
     "typescript": "^5.7.2",
     "unified": "^11.0.5",

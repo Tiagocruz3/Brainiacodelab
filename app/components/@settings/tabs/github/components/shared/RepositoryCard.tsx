@@ -287,7 +287,7 @@ export function RepositoryCard({
               </span>
             )}
             {repository.fork && (
-              <span className="px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-400">
+              <span className="px-2 py-0.5 rounded-full bg-black dark:bg-gray-100 text-black dark:text-gray-800 dark:bg-black dark:bg-gray-900/20 dark:text-black dark:text-gray-400">
                 Fork
               </span>
             )}

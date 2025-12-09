@@ -25,7 +25,7 @@ const toastAnimation = cssTransition({
 export const links: LinksFunction = () => [
   {
     rel: 'icon',
-    href: '/favicon.svg',
+    href: '/logo.svg',
     type: 'image/svg+xml',
   },
   { rel: 'stylesheet', href: reactToastifyStyles },
@@ -48,17 +48,17 @@ export const links: LinksFunction = () => [
 ];
 
 const inlineThemeCode = stripIndents`
-  setTutorialKitTheme();
-
-  function setTutorialKitTheme() {
-    let theme = localStorage.getItem('bolt_theme');
-
-    if (!theme) {
-      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  // Force dark theme on initial load
+  (function setSyntaxStageTheme() {
+    var theme = 'dark';
+    try {
+      localStorage.setItem('bolt_theme', theme);
+    } catch (e) {}
+    var html = document.querySelector('html');
+    if (html) {
+      html.setAttribute('data-theme', theme);
     }
-
-    document.querySelector('html')?.setAttribute('data-theme', theme);
-  }
+  })();
 `;
 
 export const Head = createHead(() => (

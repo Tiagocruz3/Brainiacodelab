@@ -967,9 +967,9 @@ export default function SupabaseTab() {
                             label: 'Functions',
                             value: totalFunctions,
                             icon: 'i-ph:code',
-                            color: 'text-purple-500',
-                            bgColor: 'bg-purple-100 dark:bg-purple-900/20',
-                            textColor: 'text-purple-800 dark:text-purple-400',
+                            color: 'text-black dark:text-gray-500',
+                            bgColor: 'bg-black dark:bg-gray-100 dark:bg-black dark:bg-gray-900/20',
+                            textColor: 'text-black dark:text-gray-800 dark:text-black dark:text-gray-400',
                           },
                           {
                             label: 'Tables',

@@ -24,9 +24,9 @@ export function HeaderActionButtons({ chatStarted: _chatStarted }: HeaderActionB
         <div className="flex border border-bolt-elements-borderColor rounded-md overflow-hidden text-sm">
           <button
             onClick={() =>
-              window.open('https://github.com/stackblitz-labs/bolt.diy/issues/new?template=bug_report.yml', '_blank')
+              window.open('https://github.com/syntaxstage/issues/new?template=bug_report.yml', '_blank')
             }
-            className="rounded-l-md items-center justify-center [&:is(:disabled,.disabled)]:cursor-not-allowed [&:is(:disabled,.disabled)]:opacity-60 px-3 py-1.5 text-xs bg-accent-500 text-white hover:text-bolt-elements-item-contentAccent [&:not(:disabled,.disabled)]:hover:bg-bolt-elements-button-primary-backgroundHover outline-accent-500 flex gap-1.5"
+            className="rounded-l-md items-center justify-center [&:is(:disabled,.disabled)]:cursor-not-allowed [&:is(:disabled,.disabled)]:opacity-60 px-3 py-1.5 text-xs bg-gray-950 dark:bg-white text-white dark:text-gray-950 hover:text-bolt-elements-item-contentAccent [&:not(:disabled,.disabled)]:hover:bg-gray-900 dark:hover:bg-gray-100 outline-gray-950 dark:outline-white flex gap-1.5"
             title="Report Bug"
           >
             <div className="i-ph:bug" />
@@ -42,7 +42,7 @@ export function HeaderActionButtons({ chatStarted: _chatStarted }: HeaderActionB
                 console.error('Failed to download debug log:', error);
               }
             }}
-            className="rounded-r-md items-center justify-center [&:is(:disabled,.disabled)]:cursor-not-allowed [&:is(:disabled,.disabled)]:opacity-60 px-3 py-1.5 text-xs bg-accent-500 text-white hover:text-bolt-elements-item-contentAccent [&:not(:disabled,.disabled)]:hover:bg-bolt-elements-button-primary-backgroundHover outline-accent-500 flex gap-1.5"
+            className="rounded-r-md items-center justify-center [&:is(:disabled,.disabled)]:cursor-not-allowed [&:is(:disabled,.disabled)]:opacity-60 px-3 py-1.5 text-xs bg-gray-950 dark:bg-white text-white dark:text-gray-950 hover:text-bolt-elements-item-contentAccent [&:not(:disabled,.disabled)]:hover:bg-gray-900 dark:hover:bg-gray-100 outline-gray-950 dark:outline-white flex gap-1.5"
             title="Download Debug Log"
           >
             <div className="i-ph:download" />

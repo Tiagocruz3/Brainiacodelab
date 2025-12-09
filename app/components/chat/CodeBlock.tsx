@@ -65,7 +65,7 @@ export const CodeBlock = memo(
           {!disableCopy && (
             <button
               className={classNames(
-                'flex items-center bg-accent-500 p-[6px] justify-center before:bg-white before:rounded-l-md before:text-gray-500 before:border-r before:border-gray-300 rounded-md transition-theme',
+                'flex items-center bg-gray-950 dark:bg-white p-[6px] justify-center before:bg-white dark:before:bg-gray-950 before:rounded-l-md before:text-gray-500 dark:before:text-gray-400 before:border-r before:border-gray-300 dark:before:border-gray-700 rounded-md transition-theme',
                 {
                   'before:opacity-0': !copied,
                   'before:opacity-100': copied,
