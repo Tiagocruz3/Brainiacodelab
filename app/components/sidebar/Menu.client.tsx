@@ -73,7 +73,7 @@ export const Menu = () => {
   const [dialogContent, setDialogContent] = useState<DialogContent>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const profile = useStore(profileStore);
-  const { isAuthenticated } = useStore(authStore);
+  const { isAuthenticated, user } = useStore(authStore);
   const [selectionMode, setSelectionMode] = useState(false);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
@@ -555,21 +555,23 @@ export const Menu = () => {
           <div className="flex items-center justify-between border-t border-gray-200 dark:border-gray-800 px-4 py-3">
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2">
-                <div className="flex items-center justify-center w-[32px] h-[32px] overflow-hidden bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-500 rounded-full shrink-0">
-                  {profile?.avatar ? (
+                <div className="flex items-center justify-center w-[32px] h-[32px] overflow-hidden bg-red-500 text-white rounded-full shrink-0">
+                  {user?.avatar_url ? (
                     <img
-                      src={profile.avatar}
-                      alt={profile?.username || 'User'}
+                      src={user.avatar_url}
+                      alt={user?.username || user?.email || 'User'}
                       className="w-full h-full object-cover"
                       loading="eager"
                       decoding="sync"
                     />
                   ) : (
-                    <div className="i-ph:user-fill text-lg" />
+                    <span className="font-medium text-sm">
+                      {(user?.username || user?.email || 'U').charAt(0).toUpperCase()}
+                    </span>
                   )}
                 </div>
                 <span className="font-medium text-sm text-gray-900 dark:text-white truncate max-w-[140px]">
-                  {profile?.username || 'Guest User'}
+                  {user?.username || user?.email?.split('@')[0] || 'Guest User'}
                 </span>
               </div>
             </div>

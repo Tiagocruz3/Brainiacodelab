@@ -1,18 +1,12 @@
-import { useState } from 'react';
 import { useStore } from '@nanostores/react';
 import { ClientOnly } from 'remix-utils/client-only';
 import { chatStore } from '~/lib/stores/chat';
-import { authStore } from '~/lib/stores/auth';
 import { classNames } from '~/utils/classNames';
 import { HeaderActionButtons } from './HeaderActionButtons.client';
 import { ChatDescription } from '~/lib/persistence/ChatDescription.client';
-import { AuthDialog } from '../auth/AuthDialog';
-import { UserMenu } from '../auth/UserMenu';
 
 export function Header() {
   const chat = useStore(chatStore);
-  const { isAuthenticated, isLoading } = useStore(authStore);
-  const [showAuthDialog, setShowAuthDialog] = useState(false);
 
   return (
     <header
@@ -42,33 +36,9 @@ export function Header() {
           </ClientOnly>
         </>
       )}
-      
-      {/* Auth Section */}
+
+      {/* User profile moved to sidebar */}
       {!chat.started && <div className="flex-1" />}
-      <ClientOnly>
-        {() => (
-          <div className="flex items-center gap-2">
-            {!isLoading && (
-              <>
-                {isAuthenticated ? (
-                  <UserMenu />
-                ) : (
-                  <a
-                    href="/login"
-                    className={classNames(
-                      'px-4 py-2 rounded-lg font-medium',
-                      'bg-red-500 hover:bg-red-600 text-white',
-                      'transition-colors'
-                    )}
-                  >
-                    Sign in
-                  </a>
-                )}
-              </>
-            )}
-          </div>
-        )}
-      </ClientOnly>
     </header>
   );
 }
